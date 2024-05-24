@@ -39,8 +39,17 @@
 	need to use distance between spherical extensions from (6) to calculate distance between objects made up
 	of multiple spherical extensions.
 (9)
-    This b basically tells us how we can see object in some space. Idea is that we have original object, along
-	with additional information about its configuration.
+    This basically tells us how we can see object in some space. Idea is that we have original object, along
+	with additional information about its configuration. Current configuration is represented with vector in
+	some configuration space. Practically, this just means that we have parameters like position of object in
+	our world, its rotation etc. Position and rotation are important for collision since they change relation
+	between our object. For this reason, paper mentions these two. This formula tells us that, if we have
+	object in its base state 'Ci' (for example, model that we import from .obj file is defined in its local
+	coordinate system) and we have configuration information 'q', then we can use that information 'q' to
+	figure our position and rotation of base state, thus producing actual object state. We produce this state
+	by simply applying rotation to base state and then translation.
+(10)
+    
 */
 
 int main() {

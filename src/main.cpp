@@ -59,10 +59,10 @@
 	triangle made from those points. This one is important since distance between two objects is the distance
 	between their boundaries.
 (13)
-    This defines origin point of some set X to be the point in X that is closest to the origin of the space
+    This defines near point of some set X to be the point in X that is closest to the origin of the space
 	(for example 3D space).
 (14)
-    This just tells us that the origin point of convex combination can be represented as convex combination for
+    This just tells us that the near point of convex combination can be represented as convex combination for
 	some coefficients.
 (15),(16)
     This introduces support function which takes vector and spits out number. Intuitively, if we plug in unit vector
@@ -100,6 +100,16 @@
 	'S(M) = S1(M) + S2(-M)'. From this, we get 'S1(M) + S2(-M) = P(M) * M', and then 'P1(M)*M + P2(-M)*(-M) = P(M)*M'. Our goal here is to
 	find 'P(M)', but it is obvious that the two sides of equation are equal when 'P(M) = P1(M) - P2(-M)', which given us second formula
 	in paper.
+	From these formulas, we know that even though difference set size (N) is product of original sets sizes (N1*N2), we can calculate support
+	function and corresponding point with complexity (N1 + N2).
+(22)
+    Output of the algorithm is near point for difference set and its length is distance between two original sets.
+(23),(24)
+    Input to the algorithm consists of points of initial sets and also of support functions and corresponding solution points for those sets.
+	Also, we are given formula for calculating near point for difference set. It is easy to derive since we know that it lies on the
+	convex boundary of difference set ie. it is convex combination of points in difference set. Additionally, since every point in
+	difference set can be expressed as difference between two vectors, one from each initial set, we just need to plug this in
+	convex combination and separate one sum to two sums. Now, two sum represent near points for initial sets.
 */
 
 int main() {

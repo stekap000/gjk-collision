@@ -47,9 +47,29 @@
 	object in its base state 'Ci' (for example, model that we import from .obj file is defined in its local
 	coordinate system) and we have configuration information 'q', then we can use that information 'q' to
 	figure our position and rotation of base state, thus producing actual object state. We produce this state
-	by simply applying rotation to base state and then translation.
+	by simply applying rotation to base state and then translation. Formula is expressed in such a way that it
+	also encompasses object that are made up of smaller objects.
 (10)
+    This is the same statement as (9), just for spherical extensions and objects that are made up of multiple
+	spherical extension.
+(11)
     
+(12)
+    Convex combination of points. Intuitively, if we have 3 points, then convex combination is the boundary of
+	triangle made from those points. This one is important since distance between two objects is the distance
+	between their boundaries.
+(13)
+    This defines origin point of some set X to be the point in X that is closest to the origin of the space
+	(for example 3D space).
+(14)
+    This just tells us that the origin point of convex combination can be represented as convex combination for
+	some coefficients.
+(15),(16)
+    This introduces support function which takes vector and spits out number. Intuitively, if we plug in unit vector
+	that points in some direction, then the function will return us distance from the origin to the point of our set
+	that is furthest away in that direction. If input vector is not unit, then the previous result is just scaled.
+	Solution is just a point of our set, that is furthest away in chosen direction.
+	
 */
 
 int main() {

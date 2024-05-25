@@ -81,7 +81,25 @@
 	also represents origin of that new set. Since paper defines difference as a set containing differences between all
 	possible combinations of elements from two sets, the resulting set will have 'M*N' if 'M' is the size of first set
 	and 'N' the size of second. Main question now is "is there a way to solve problem without having complexity of M*N?".
-
+(21)
+    Here, paper makes a claim that in order to find distance from (18), we just need to worry about the value of support
+	function and about a point for which this value is returned. Then, immediate question is how to compute support
+	function value for set that is the difference of two original sets. If we have two convex sets 'K1' and 'K2', we can assume
+	that we have support function values for them for some direction vector 'M', since we know how to compute that from (17).
+	Looking at formula for support function, we can plug set 'x = x1 - x2' where 'x1' is from 'K1' and 'x2' is from 'K2'. This
+	would be formula for support function of difference set 'K = K1 - K2'. We can try to express this via something that we know
+	how to compute, which are support functions for 'K1' and 'K2'. Looking at case where 'x = x1 - x2', we can get maximum
+	when 'x1*M' is maximum and 'x2*M' is minumum. In other words, we can write support function for 'K' as 'max{x1*M} - min{x2*M}'.
+	First term, 'max{x1*M', is just support function for first set 'K1'. Problem is the second term where we would also like to
+	get 'max' of something, since that would me that it is also support function of something, which we know how to compute.
+	We can write '- min{x2*M}' as '+ max{x2*(-M)}' which can be easily imagined by seeing '-' as reflection of x-axis over 0.
+	This gives us a way to calculate support function of difference set via support functions of two original sets.
+	Another thing to calculate is actual point for which we get support function value. Let's mark support functions as 'S1(M)', 'S2(M)' and
+	'S(M)' for two original sets and difference set. We will use 'M' for direction vector. Let's also mark points furthest in direction 'M'
+	for given sets as 'P1(M)', 'P2(M)' and 'P(M)'. We know that 'S(M) = P(M) * M' must hold. Based on previous derivation, we know that
+	'S(M) = S1(M) + S2(-M)'. From this, we get 'S1(M) + S2(-M) = P(M) * M', and then 'P1(M)*M + P2(-M)*(-M) = P(M)*M'. Our goal here is to
+	find 'P(M)', but it is obvious that the two sides of equation are equal when 'P(M) = P1(M) - P2(-M)', which given us second formula
+	in paper.
 */
 
 int main() {

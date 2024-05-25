@@ -69,7 +69,19 @@
 	that points in some direction, then the function will return us distance from the origin to the point of our set
 	that is furthest away in that direction. If input vector is not unit, then the previous result is just scaled.
 	Solution is just a point of our set, that is furthest away in chosen direction.
-	
+(17)
+    This tells us that the value of support function and solution vector for some input direction vector is the same
+	for the set of points and for convex boundary of those points. This makes sense, since furthest point, in any
+	direction, will lie at that convex boundary. Additionally, this tells us that we can find value of support function
+	by iterating over all points in our set, finding dot product between them and chosen direction vector. It is linear
+	complexity procedure.
+(18),(19),(20)
+    These basically say that we can shift our perspective from viewing two objects and finding distance between them
+	to viewing one object that is the difference between the two and finding its minimum length element. This element
+	also represents origin of that new set. Since paper defines difference as a set containing differences between all
+	possible combinations of elements from two sets, the resulting set will have 'M*N' if 'M' is the size of first set
+	and 'N' the size of second. Main question now is "is there a way to solve problem without having complexity of M*N?".
+
 */
 
 int main() {

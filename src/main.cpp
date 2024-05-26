@@ -110,6 +110,12 @@
 	convex boundary of difference set ie. it is convex combination of points in difference set. Additionally, since every point in
 	difference set can be expressed as difference between two vectors, one from each initial set, we just need to plug this in
 	convex combination and separate one sum to two sums. Now, two sum represent near points for initial sets.
+(25)
+    This introduces a measure for how close we are to near point of polytope. Function represents upper bound for quadratic difference between
+	polytope point 'x' and polytope near point that we are trying to find. Function value is 0 when point 'x' is the near point. Important
+	claim is that if function value is greater than 0 ie. if we haven't reached near point, then we can get closer to it by going
+	from point 'x' in the direction that is opposite vector of 'x', reaching furthest polytope point in that direction. This property allows
+	us to construct algorithm for finding near point.
 */
 
 int main() {

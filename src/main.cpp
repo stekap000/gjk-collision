@@ -120,12 +120,17 @@
 
 
     The goal of the algorithm is to find near point of some shape and then its norm. This is done by starting with a subset of points from this
-	shape and finding near point for that subset. We then check if this is the near point of the whole shape by evaluating measure function. If
-	it is, we solved the problem. If it is not, then we form new subset from old one by including found near point and excluding subset point that
-	is furthest from it. We repeat this process until measure function is zero.
+	shape and finding near point for that convex combination of that subset. We then check if this is the near point of the whole shape by
+	evaluating measure function, which is possible because we only need to know support function value for difference set in order to do this,
+	and we can calculate it from two original objects. If the value is 0, we have solved the problem. If it is not, then we form new subset from
+	old one by including point that is furthest one in the direction opposite to near point vector. We are guaranteed that we will find point
+	closer to origin in that direction. This is because we arrive at contradiction if this is not the case. Consider that there is no point in
+	that direction that is closer to origin. In that case, out last near value must lie on support plane ie. it must be near point of the whole
+	set, which cotradicts previous step where measure function told us that it is not. Appart from including given point, we need to exclude point
+	that is furthest away from current near point in current set. We repeat this process until measure function is zero.
 
 	Why care about near point of some object? It is because we can apply this to a difference set. In that case, near point will represent distance
-	between two objects and objects overlap if that value is zero ie. object overlap if and only if difference set contains zero vector. The whole
+	between two objects and objects overlap if that value is zero ie. objects overlap if and only if difference set contains zero vector. The whole
 	point of the algorithm is to try to efficiently find an answer to the question of whether the difference set contains zero vector and it does this
 	by going over simplices of difference set in the direction that is supposed to contain near point.
 */

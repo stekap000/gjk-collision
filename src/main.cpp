@@ -116,10 +116,22 @@
 	claim is that if function value is greater than 0 ie. if we haven't reached near point, then we can get closer to it by going
 	from point 'x' in the direction that is opposite vector of 'x', reaching furthest polytope point in that direction. This property allows
 	us to construct algorithm for finding near point.
+(26)
+
+
+    The goal of the algorithm is to find near point of some shape and then its norm. This is done by starting with a subset of points from this
+	shape and finding near point for that subset. We then check if this is the near point of the whole shape by evaluating measure function. If
+	it is, we solved the problem. If it is not, then we form new subset from old one by including found near point and excluding subset point that
+	is furthest from it. We repeat this process until measure function is zero.
+
+	Why care about near point of some object? It is because we can apply this to a difference set. In that case, near point will represent distance
+	between two objects and objects overlap if that value is zero ie. object overlap if and only if difference set contains zero vector. The whole
+	point of the algorithm is to try to efficiently find an answer to the question of whether the difference set contains zero vector and it does this
+	by going over simplices of difference set in the direction that is supposed to contain near point.
 */
 
 int main() {
-	std::cout << "Works!" << std::endl;
+	//std::cout << "Works!" << std::endl;
 	
 	return 0;
 }

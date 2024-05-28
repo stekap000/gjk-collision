@@ -156,6 +156,9 @@
 	by going over simplices of difference set in the direction that is supposed to contain near point.
 */
 
+// TODO: Implement original GJK
+// TODO: Implement optimizations (Erickson, Muratori, ...) [A Geometric Interpretation of the Boolean GJK Algorithm]
+
 int main() {
 	//std::cout << "Works!" << std::endl;
 	

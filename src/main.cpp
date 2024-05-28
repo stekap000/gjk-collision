@@ -117,8 +117,19 @@
 	from point 'x' in the direction that is opposite vector of 'x', reaching furthest polytope point in that direction. This property allows
 	us to construct algorithm for finding near point.
 (26)
+    This tells us that distance of iterated near points from the origin decreases. To see why, we can imagine some arbitrary iteration. Within
+	that iteration we found near point for current simplex. If this is a near point of the whole object ie. measure function is 0, then we are done.
+	If this is not the case, we are looking for next near point of next simplex in the direction opposite to current near point vector.Let's
+	suppose that we can't find such point. That would mean that our previous near point is the closest one to the origin in that direction.
+	But this is in contradiction with the fact that measure function told us that it is not the closest one ie. value of measure function was not 0.
+	This means that there must be some next near point that is closer to the origin that current near point, if the current near point is not
+	the near point of the whole object.
+(27),(28)
+    These just illustrate steps of the algorithm and indicate that algorithm works when we start with a simplex of the same dimension as a whole object,
+	but also when we start with simplex of lower dimension. In this case, we eventually get to iteration over simplices of the same dimension as object,
+	in a certain number of steps that depends on the dimension of starting simplex.
 
-
+    -----------------
     The goal of the algorithm is to find near point of some shape and then its norm. This is done by starting with a subset of points from this
 	shape and finding near point for that convex combination of that subset. We then check if this is the near point of the whole shape by
 	evaluating measure function, which is possible because we only need to know support function value for difference set in order to do this,

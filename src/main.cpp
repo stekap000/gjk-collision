@@ -128,7 +128,17 @@
     These just illustrate steps of the algorithm and indicate that algorithm works when we start with a simplex of the same dimension as a whole object,
 	but also when we start with simplex of lower dimension. In this case, we eventually get to iteration over simplices of the same dimension as object,
 	in a certain number of steps that depends on the dimension of starting simplex.
-
+(29)
+    This just tells us that within some iteration 'k', we can represent near point of the simplex in that iteration as a convex combination of
+	vertices of that simplex. It also states that any subset of vertices of that simplex is affinely independent. Intuitively, this means that if we were
+	to move that subset in such a way that we put one of its elements in the coordinate origin, all vectors that represent other vertices would
+	be linearly independent. Within the algorithm, this subset represents subset of current simplex's vertices that has at most 'dimension + 1'
+	elements ie. we need to throw away one element when we include object's support vector in the direction opposite to current simplex near point vector.
+	'Is' is an index set that we use to pick points from simplex. One particular pick is denoted by 'Ys' which is a set of points, where 's' just
+	represents which index set was used.
+(30)
+    
+	
     -----------------
     The goal of the algorithm is to find near point of some shape and then its norm. This is done by starting with a subset of points from this
 	shape and finding near point for that convex combination of that subset. We then check if this is the near point of the whole shape by

@@ -94,30 +94,27 @@
 	function and about a point for which this value is returned. Then, immediate question is how to compute support
 	function value for set that is the difference of two original sets. If we have two convex sets 'K1' and 'K2', we can assume
 	that we have support function values for them for some direction vector 'M', since we know how to compute that from (17).
-	Looking at formula for support function, we can plug set 'x = x1 - x2' where 'x1' is from 'K1' and 'x2' is from 'K2'. This
+	Looking at formula for support function, we can plug 'x = x1 - x2' where 'x1' is from 'K1' and 'x2' is from 'K2'. This
 	would be formula for support function of difference set 'K = K1 - K2'. We can try to express this via something that we know
-	how to compute, which are support functions for 'K1' and 'K2'. Looking at case where 'x = x1 - x2', we can get maximum
-	when 'x1*M' is maximum and 'x2*M' is minumum. In other words, we can write support function for 'K' as 'max{x1*M} - min{x2*M}'.
-	First term, 'max{x1*M', is just support function for first set 'K1'. Problem is the second term where we would also like to
-	get 'max' of something, since that would me that it is also support function of something, which we know how to compute.
+	how to compute, which are support functions for 'K1' and 'K2'. Looking at the case where 'x = x1 - x2', we can get maximum
+	when 'x1*M' is maximum and 'x2*M' is minimum. In other words, we can write support function for 'K' as 'max{x1*M} - min{x2*M}'.
+	First term, 'max{x1*M}', is just support function for first set 'K1'. Problem is the second term where we would also like to
+	get 'max' of something, since that would mean that it is also support function of something, which we know how to compute.
 	We can write '- min{x2*M}' as '+ max{x2*(-M)}' which can be easily imagined by seeing '-' as reflection of x-axis over 0.
 	This gives us a way to calculate support function of difference set via support functions of two original sets.
-	Another thing to calculate is actual point for which we get support function value. Let's mark support functions as 'S1(M)', 'S2(M)' and
+	Another thing to calculate is an actual point for which we get support function value. Let's mark support functions as 'S1(M)', 'S2(M)' and
 	'S(M)' for two original sets and difference set. We will use 'M' for direction vector. Let's also mark points furthest in direction 'M'
 	for given sets as 'P1(M)', 'P2(M)' and 'P(M)'. We know that 'S(M) = P(M) * M' must hold. Based on previous derivation, we know that
 	'S(M) = S1(M) + S2(-M)'. From this, we get 'S1(M) + S2(-M) = P(M) * M', and then 'P1(M)*M + P2(-M)*(-M) = P(M)*M'. Our goal here is to
-	find 'P(M)', but it is obvious that the two sides of equation are equal when 'P(M) = P1(M) - P2(-M)', which given us second formula
-	in paper.
+	find 'P(M)', but it is obvious that the two sides of equation are equal when 'P(M) = P1(M) - P2(-M)', which gives us second formula
+	from the paper.
 	From these formulas, we know that even though difference set size (N) is product of original sets sizes (N1*N2), we can calculate support
 	function and corresponding point with complexity (N1 + N2).
 (22)
-    Output of the algorithm is near point for difference set and its length is distance between two original sets.
+    Output of the algorithm is near point for difference set and the length of this point is the distance between two original sets.
 (23),(24)
-    Input to the algorithm consists of points of initial sets and also of support functions and corresponding solution points for those sets.
-	Also, we are given formula for calculating near point for difference set. It is easy to derive since we know that it lies on the
-	convex boundary of difference set ie. it is convex combination of points in difference set. Additionally, since every point in
-	difference set can be expressed as difference between two vectors, one from each initial set, we just need to plug this in
-	convex combination and separate one sum to two sums. Now, two sum represent near points for initial sets.
+    Input to the algorithm consists of points of initial sets and also of support functions and functions for finding corresponding solution points.
+	Also, we are given formula for calculating near point for difference set.
 (25)
     This introduces a measure for how close we are to near point of polytope. Function represents upper bound for quadratic difference between
 	polytope point 'x' and polytope near point that we are trying to find. Function value is 0 when point 'x' is the near point. Important

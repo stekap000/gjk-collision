@@ -15,7 +15,7 @@
     taking the smallest of those calculated distances.
 (5)
     Spherical extension of some original object is the new object that contains all points of the
-    original object, but also add points that are at distance 'r' from original object. If the
+    original object, but also adds points that are at distance 'r' from original object. If the
     distance that we choose is 'r', then we are making 'rth spherical extension'. Intuitively,
     if we observe 2D case with a square being the original object, we can construct 'rth spherical
     extension' by first making the circle of radius 'r' and placing its center in one of the square's
@@ -43,44 +43,52 @@
 	with additional information about its configuration. Current configuration is represented with vector in
 	some configuration space. Practically, this just means that we have parameters like position of object in
 	our world, its rotation etc. Position and rotation are important for collision since they change relation
-	between our object. For this reason, paper mentions these two. This formula tells us that, if we have
+	between our objects. For this reason, paper mentions these two. This formula tells us that, if we have
 	object in its base state 'Ci' (for example, model that we import from .obj file is defined in its local
 	coordinate system) and we have configuration information 'q', then we can use that information 'q' to
 	figure our position and rotation of base state, thus producing actual object state. We produce this state
 	by simply applying rotation to base state and then translation. Formula is expressed in such a way that it
-	also encompasses object that are made up of smaller objects.
+	also encompasses objects that are made up of smaller objects.
 (10)
     This is the same statement as (9), just for spherical extensions and objects that are made up of multiple
-	spherical extension.
+	spherical extensions.
 (11)
-    
+    This introduces concept of affine combination, which is at the end not that important for this paper.
 (12)
     Convex combination of points. Intuitively, if we have 3 points, then convex combination is the boundary of
 	triangle made from those points. This one is important since distance between two objects is the distance
 	between their boundaries.
 (13)
     This defines near point of some set X to be the point in X that is closest to the origin of the space
-	(for example 3D space).
+	(for example 3D space). Reason for introduction of this concept is the following: When finding whether two
+	objects collide, we will form third object that is the difference between the original two. In this case,
+	this third object will contain the origin if the original two objects overlap. Our goal will be to check if
+	it contains the origin, and we will move through this object to find that out. We will move in the direction
+	that gets us closer to the origin. To know how close we are, we will use this idea of near point.
 (14)
-    This just tells us that the near point of convex combination can be represented as convex combination for
-	some coefficients.
+    This just tells us that the near point of convex combination of points of some set can itself be represented
+	as convex combination of the same points, for some coefficients.
 (15),(16)
     This introduces support function which takes vector and spits out number. Intuitively, if we plug in unit vector
-	that points in some direction, then the function will return us distance from the origin to the point of our set
-	that is furthest away in that direction. If input vector is not unit, then the previous result is just scaled.
-	Solution is just a point of our set, that is furthest away in chosen direction.
+	that points in some direction, then we can imagine a plane that is orthogonal to that vector and moves along that
+	vector (in positive or negative direction). The support function will return us distance of the plane from the
+	origin when it reaches the point of our object that is furthest away in that direction. If input vector is not unit,
+	then the previous result is just scaled. Also, paper introduces this concept of solution to (15), and denotes it
+	by 's'. This is just a point that is furthest away in chosen direction ie. point for which support function gave
+	us 'plane distance'.
 (17)
     This tells us that the value of support function and solution vector for some input direction vector is the same
 	for the set of points and for convex boundary of those points. This makes sense, since furthest point, in any
 	direction, will lie at that convex boundary. Additionally, this tells us that we can find value of support function
-	by iterating over all points in our set, finding dot product between them and chosen direction vector. It is linear
+	by iterating over all points in our set, finding dot product between them and chosen direction vector. It is a linear
 	complexity procedure.
 (18),(19),(20)
     These basically say that we can shift our perspective from viewing two objects and finding distance between them
 	to viewing one object that is the difference between the two and finding its minimum length element. This element
 	also represents origin of that new set. Since paper defines difference as a set containing differences between all
 	possible combinations of elements from two sets, the resulting set will have 'M*N' if 'M' is the size of first set
-	and 'N' the size of second. Main question now is "is there a way to solve problem without having complexity of M*N?".
+	and 'N' the size of second. Main question now is "is there a way to solve problem without having to generate and
+	operate on MxN points?".
 (21)
     Here, paper makes a claim that in order to find distance from (18), we just need to worry about the value of support
 	function and about a point for which this value is returned. Then, immediate question is how to compute support

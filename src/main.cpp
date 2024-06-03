@@ -162,7 +162,7 @@
 */
 
 // TODO: Implement original GJK
-// TODO: Implement optimizations (Erickson, Muratori, ...) [A Geometric Interpretation of the Boolean GJK Algorithm]
+// TODO: Implement optimizations (Erickson, Muratori, ...) [A Geometric Interpretation of the Boolean GJK Algorithm] https://arxiv.org/pdf/1505.07873
 
 int main() {
 	//std::cout << "Works!" << std::endl;

@@ -163,6 +163,7 @@
 
 // TODO: Implement original GJK
 // TODO: Implement optimizations (Erickson, Muratori, ...) [A Geometric Interpretation of the Boolean GJK Algorithm] https://arxiv.org/pdf/1505.07873
+// TODO: 2D case, 3D case
 
 int main() {
 	//std::cout << "Works!" << std::endl;

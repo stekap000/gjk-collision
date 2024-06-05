@@ -165,6 +165,42 @@
 // TODO: Implement optimizations (Erickson, Muratori, ...) [A Geometric Interpretation of the Boolean GJK Algorithm] https://arxiv.org/pdf/1505.07873
 // TODO: 2D case, 3D case
 
+// pseudocode
+struct shape {
+	v3 *points;
+};
+
+struct simplex {
+	v3 *points;
+};
+
+v3 closest_simplex_point(simplex s) {
+	// ...
+}
+
+float gjk(shape s1, shape s2) {
+	simplex s;
+	// Start out with some point in minkowski diff.
+	v3 maybe_closest = pick_from_md(s1, s2);
+
+	while(true) {
+		// Furthest point in opposite direction (direction towards origin).
+		v3 support_point = md_support(-v3);
+
+		// We are moving towards origin and there is no point that is closer to origin that our starting point.
+		// This means that starting point is on the edge of minkowski diff and is closest to origin, so we return it.
+		if(support_point == maybe_closest // up to error) {
+			return support_point;
+		}
+	
+		add_point_to_simplex(s, support_point);
+		maybe_closest = closest_simplex_point(s);
+		// Only preserve points of sub-simplex that contains simplex point closest to origin.
+		// We will build new simplex from piece of the old one that is closest to origin.
+		cull_simplex(s);
+	}
+}
+
 int main() {
 	//std::cout << "Works!" << std::endl;
 	

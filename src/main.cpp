@@ -166,9 +166,9 @@
 // TODO: 2D case, 3D case
 
 // pseudocode
-enum shape_type { polygon, circle };
-struct shape {
-	shape_type type;
+enum shape_2d_type { polygon, circle };
+struct shape_2d {
+	shape_2d_type type;
 	v3 center;
 	float radius;
 	v3 *points;
@@ -178,11 +178,10 @@ struct simplex {
 	v3 *points;
 };
 
-v3 support(shape s, v3 direction) {
+v3 support(shape_2d s, v3 direction) {
 	switch(s.type) {
 	case circle: {
-		// ...
-		break;
+		return s.center + s.radius * direction.unit();
 	}
 	case polygon: {
 		// ...
@@ -194,15 +193,15 @@ v3 support(shape s, v3 direction) {
 	}
 }
 
-v3 minkowski_diff_support(shape s1, shape s2, v3 direction) {
+v3 minkowski_diff_support(shape_2d s1, shape_2d s2, v3 direction) {
 	return support(s1, direction) - support(s2, -direction);
 }
 
 v3 closest_simplex_point(simplex s) {
-	// ...
+	
 }
 
-v3 gjk(shape s1, shape s2) {
+v3 gjk(shape_2d s1, shape_2d s2) {
 	simplex s;
 	// Start out with some point in minkowski diff.
 	v3 maybe_closest = pick_from_md(s1, s2);

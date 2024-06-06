@@ -166,7 +166,11 @@
 // TODO: 2D case, 3D case
 
 // pseudocode
+enum shape_type { polygon, circle };
 struct shape {
+	shape_type type;
+	v3 center;
+	float radius;
 	v3 *points;
 };
 
@@ -174,22 +178,42 @@ struct simplex {
 	v3 *points;
 };
 
+v3 support(shape s, v3 direction) {
+	switch(s.type) {
+	case circle: {
+		// ...
+		break;
+	}
+	case polygon: {
+		// ...
+		break;
+	}
+	default: {
+		// ...
+	}
+	}
+}
+
+v3 minkowski_diff_support(shape s1, shape s2, v3 direction) {
+	return support(s1, direction) - support(s2, -direction);
+}
+
 v3 closest_simplex_point(simplex s) {
 	// ...
 }
 
-float gjk(shape s1, shape s2) {
+v3 gjk(shape s1, shape s2) {
 	simplex s;
 	// Start out with some point in minkowski diff.
 	v3 maybe_closest = pick_from_md(s1, s2);
 
 	while(true) {
 		// Furthest point in opposite direction (direction towards origin).
-		v3 support_point = md_support(-v3);
+		v3 support_point = minkowski_diff_support(s1, s2, -v3);
 
 		// We are moving towards origin and there is no point that is closer to origin that our starting point.
 		// This means that starting point is on the edge of minkowski diff and is closest to origin, so we return it.
-		if(support_point == maybe_closest // up to error) {
+		if(support_point == maybe_closest /* up to error */) {
 			return support_point;
 		}
 	

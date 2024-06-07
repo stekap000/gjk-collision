@@ -171,11 +171,13 @@ struct shape_2d {
 	shape_2d_type type;
 	v3 center;
 	float radius;
+	int n;
 	v3 *points;
 };
 
 struct simplex {
-	v3 *points;
+	int n;
+	v3 points[4];
 };
 
 v3 support(shape_2d s, v3 direction) {

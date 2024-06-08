@@ -200,7 +200,12 @@ v3 minkowski_diff_support(shape_2d s1, shape_2d s2, v3 direction) {
 }
 
 v3 closest_simplex_point(simplex s) {
-	
+	switch(s.n) {
+	case 1: return s.points[0];
+	case 2:
+	case 3:
+	case 4:
+	}
 }
 
 v3 gjk(shape_2d s1, shape_2d s2) {

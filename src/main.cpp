@@ -201,10 +201,18 @@ v3 minkowski_diff_support(shape_2d s1, shape_2d s2, v3 direction) {
 
 v3 closest_simplex_point(simplex s) {
 	switch(s.n) {
-	case 1: return s.points[0];
-	case 2:
-	case 3:
-	case 4:
+	case 1: {
+		return s.points[0];
+	}
+	case 2: {
+		
+	}
+	case 3: {
+
+	}
+	case 4: {
+
+	}
 	}
 }
 
@@ -212,12 +220,13 @@ v3 gjk(shape_2d s1, shape_2d s2) {
 	simplex s;
 	// Start out with some point in minkowski diff.
 	v3 maybe_closest = pick_from_md(s1, s2);
+	add_point_to_simplex(s, maybe_closest);
 
 	while(true) {
 		// Furthest point in opposite direction (direction towards origin).
-		v3 support_point = minkowski_diff_support(s1, s2, -v3);
+		v3 support_point = minkowski_diff_support(s1, s2, -maybe_closest);
 
-		// We are moving towards origin and there is no point that is closer to origin that our starting point.
+		// We are moving towards origin and there is no point that is closer to origin than our starting point.
 		// This means that starting point is on the edge of minkowski diff and is closest to origin, so we return it.
 		if(support_point == maybe_closest /* up to error */) {
 			return support_point;

@@ -41,7 +41,7 @@ void add_point_to_simplex(simplex *s, v3 point) {
 	s->points[n++] = point;
 }
 
-bool update_simplex_and_direction(simplex *s, v3 *d) {
+bool update_simplex_and_direction_2d(simplex *s, v3 *d) {
 	// One point case doesn't happen.
 
 	// Two point case is determined because of how we found support point and
@@ -52,17 +52,32 @@ bool update_simplex_and_direction(simplex *s, v3 *d) {
 		*d = v3::cross(v3::cross(temp, -(s->points[1])), temp);
 	}
 	case 3: {
-		
-	}
-	case 4: {
+		v3 temp1 = s->points[0] - s->points[2]; // AC
+		v3 temp2 = s->points[1] - s->points[2]; // AB
+		v3 N = v3::cross(temp2, temp1);
 
+		if(v3::dot(v3::cross(N, temp1), -(s->points[2])) > 0) {
+			s->n = 2;
+			s->points[1] = s->points[2];
+			*d = v3::cross(v3::cross(temp1, -(s->points[2])), temp1);
+		}
+		else {
+			if(v3::dot(v3::cross(temp2, N), -(s->points[2])) > 0) {
+				s->n = 2;
+				s->points[0] = s->points[2];
+				*d = v3::cross(v3::cross(temp2, -(s->points[2])), temp2);
+			}
+			else {
+				return true;
+			}
+		}
 	}
 	}
 
 	return false;
 }
 
-bool gjk(shape_2d s1, shape_2d s2) {
+bool gjk_2d(shape_2d s1, shape_2d s2) {
 	simplex s;
 	v3 direction;
 	// Start out with some point in minkowski diff.
@@ -80,7 +95,7 @@ bool gjk(shape_2d s1, shape_2d s2) {
 
 		add_point_to_simplex(&s, support_point);
 
-		if (update_simplex_and_direction(&s, &direction)) return true;
+		if (update_simplex_and_direction_2d(&s, &direction)) return true;
 	}
 }
 

@@ -24,11 +24,21 @@ v3 support(shape_2d s, v3 direction) {
 		return s.center + s.radius * direction.unit();
 	}
 	case polygon: {
-		// ...
-		break;
+		float max = -999999;
+		float temp = 0;
+		int temp_i = 0;
+		for(int i = 0; i < s.n; ++i) {
+			temp = v3::dot(s.points[i], direction);
+			if(temp > max) {
+				max = temp;
+				temp_i = i;
+			}
+		}
+
+		return s.points[temp_i];
 	}
 	default: {
-		// ...
+		return v3(0, 0, 0);
 	}
 	}
 }

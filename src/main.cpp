@@ -1,6 +1,12 @@
 #include <iostream>
 #include <limits>
 
+// Basis for this efficient implementation is the approach by Casey Muratori.
+// Further improvement is given in https://arxiv.org/pdf/1505.07873. It eliminates
+// search regions by taking into account the dot product check within the loop. This
+// check constricts the search regions possibilities that need to be explored when
+// simplex and direction are updated.
+
 struct v3 {
 	float x, y, z;
 

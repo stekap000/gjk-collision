@@ -1,5 +1,9 @@
 GJK paper from 1988.
 
+================
+NOT YET FINISHED
+================
+
 (1)
     Distance between two sets is the minimal distance between all possible elements of those sets.
     To find this distance, we would need to look at all possible pairs of elements, find their

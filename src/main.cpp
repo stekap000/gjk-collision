@@ -7,6 +7,8 @@
 // check constricts the search regions possibilities that need to be explored when
 // simplex and direction are updated.
 
+// TODO: It might be possible to eliminate cross products without impacting convergence.
+
 struct v3 {
 	float x, y, z;
 

@@ -102,8 +102,7 @@ bool update_simplex_and_direction(simplex *s, v3 *d) {
 	case 2: {
 		v3 temp = s->points[0] - s->points[1];
 		*d = v3::cross(v3::cross(temp, -(s->points[1])), temp);
-		break;
-	}
+	} break;
 	case 3: {
 		v3 temp1 = s->points[0] - s->points[2];
 		v3 temp2 = s->points[1] - s->points[2];
@@ -125,9 +124,28 @@ bool update_simplex_and_direction(simplex *s, v3 *d) {
 				// For 2D case, we just return true here, since we succesfully constructed triangle
 				// that contains the origin.
 				return true;
+
+				if(v3::dot(N, minus_A) > 0) {
+					// This is used if we want to preserve triangle points and normal orientation.
+					//temp1 = s->points[0];
+					//s->points[0] = s->points[2];
+					//s->points[2] = temp1;
+					*d = N;
+				}
+				else {
+					// This is used if we want to preserve triangle points and normal orientation.
+					//temp1 = s->points[2];
+					//s->points[2] = s->points[1];
+					//s->points[1] = s->points[0];
+					//s->points[0] = temp1;
+					*d = -N;
+				}
 			}
 		}
-	}
+	} break;
+	case 4: {
+
+	} break;
 	}
 
 	return false;
